@@ -40,29 +40,35 @@ nav {
 
 .nav-title {
     height: 100%;
-    width: 300px;
+    width: 400px;
     /* border: 1px solid white; */
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
+    background: #ffffff;
     /* background: #a91717; */
+    clip-path: polygon(0 0, 100% 0, 60% 100%, 0% 100%);
 }
 
 .nav-title p {
     /* background: linear-gradient(4deg, #faf20d 0%, #a91717 100%); */
     font-family: 'Sprit';
     font-size: 50px;
+    margin-left: 40px;
     /* font-weight: 500; */
     /* background-clip: text; */
-    color: #ffffff;
+    color: #0084ffe1;
     /* width: fit-content; */
 }
 
 .nav-links {
     /* border: 1px solid white; */
-    height: 100%;
+    height: 50%;
+    border-radius: 30px;
+    position: relative;
+    background: #ffffff;
     overflow: hidden;
-    width: 935px;
+    width: 735px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -77,34 +83,41 @@ nav {
 .nav-links a,
 .nav-button a {
     text-decoration: none;
-    color: #ffffff;
+    color: #0084ffe1;
     /* font-size:15px; */
 }
 
 .nav-button {
     /* border: 1px solid white; */
-    width: 300px;
+    width: 400px;
     list-style: none;
     height: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: end;
     align-items: center;
     gap: 30px;
+    background: #ffffff;
+    /* background: #a91717; */
+    clip-path: polygon(40% 0, 100% 0%, 100% 100%, 0 100%);
 }
 
 .nav-button a:first-child {
     color: #0084ffe1;
+    border: 1px solid #0084ffe1;
     border-radius: 20px;
-    background: white;
+    /* background: white; */
     padding: 10px 20px;
 }
 
 .nav-button a:last-child {
     border-radius: 20px;
-    border: 1px solid white;
+    margin-right: 40px;
+    /* border: 1px solid white; */
     /* background: white; */
     padding: 10px 15px;
     color: white;
+    background-color: #0084ffe1;
+    /* border: 1px solid #0084ffe1; */
 }
 
 /* .nav-title:hover ~ .nav-links{
