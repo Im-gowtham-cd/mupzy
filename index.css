@@ -1,0 +1,126 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: 'Sprit';
+    src: url('./font/Sprit.otf');
+}
+
+@font-face {
+    font-family: 'Komigo';
+    src: url('./font/Komigo.ttf');
+}
+
+@font-face {
+    font-family: 'Jember';
+    src: url('./font/Jember.ttf');
+}
+
+body {
+    font-family: 'Poppins';
+    background: #0084ffe1;
+}
+
+nav {
+    height: 12vh;
+    /* background-color: aquamarine; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border: 1px solid white; */
+    width: 1535px;
+    position: fixed;
+    background: blur(1px);
+    top: 0;
+    /* justify-content: space-between; */
+}
+
+.nav-title {
+    height: 100%;
+    width: 300px;
+    /* border: 1px solid white; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background: #a91717; */
+}
+
+.nav-title p {
+    /* background: linear-gradient(4deg, #faf20d 0%, #a91717 100%); */
+    font-family: 'Sprit';
+    font-size: 50px;
+    /* font-weight: 500; */
+    /* background-clip: text; */
+    color: #ffffff;
+    /* width: fit-content; */
+}
+
+.nav-links {
+    /* border: 1px solid white; */
+    height: 100%;
+    overflow: hidden;
+    width: 935px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    /* display: none; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 100px;
+}
+
+.nav-links a,
+.nav-button a {
+    text-decoration: none;
+    color: #ffffff;
+    /* font-size:15px; */
+}
+
+.nav-button {
+    /* border: 1px solid white; */
+    width: 300px;
+    list-style: none;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.nav-button a:first-child {
+    color: #0084ffe1;
+    border-radius: 20px;
+    background: white;
+    padding: 10px 20px;
+}
+
+.nav-button a:last-child {
+    border-radius: 20px;
+    border: 1px solid white;
+    /* background: white; */
+    padding: 10px 15px;
+    color: white;
+}
+
+/* .nav-title:hover ~ .nav-links{
+    background-color: white;
+    width: 935px;
+} */
+
+.content {
+    height: 88vh;
+    border: 1px solid white;
+    margin-top: 12vh;
+    width: 100%;
+}
+
+.left {
+    width: 800px;
+    height: 100%;
+    border: 1px solid white;
+}
