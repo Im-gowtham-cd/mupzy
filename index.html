@@ -28,34 +28,35 @@
         </ul>
     </nav>
     <div class="content">
-        <i class='bxr  bx-music-alt' id="animate"></i> 
+        <!-- <img src="./Preset/Y1.webp" alt="" class="Y3"> -->
+        <img src="./Preset/Y3.webp" alt="" class="Y1">
+        <!-- <img src="./Preset/Y2.webp" alt="" class="Y2"> -->
+        <i class='bxr  bx-music-alt' id="animate"></i>
+        <i class='bxr  bx-radio' id="animate"></i>
+        <i class='bxr  bx-music-alt' id="animate"></i>
+        <i class='bxr  bx-radio' id="animate"></i>
         <h1 class="personaldata">
             Song
         </h1>
         <ul class="songhead">
-            <li>Murder in my mind</li>
-            <li>Kordhell</li>
+            <li id="songTitle">Loading...</li>
+            <li id="songArtist">Artist</li>
         </ul>
-        <div class="lyrics-section">
-            <p>Take me back to the night we met</p>
-            <p>...</p>
-            <p>Take me back to the night we met</p>
-            <p>Take me back to the night we met</p>
-        </div>
         <div class="musicplayer">
-            <p class="timestart">0:00</p>
+            <p class="timestart" id="currentTime">0:00</p>
             <div class="musiccontroler">
-                <i class='bx bx-skip-previous-circle'></i>
-                 <i class='bx bx-rotate-left'></i>
-                <!-- <i class="bx bxs-play-circle"></i> -->
-                <i class="bx bxs-pause-circle"></i>
-                <i class='bx bx-rotate-right'></i>
-                <i class='bx bx-skip-next-circle'></i>
+                <i class='bx bx-skip-previous-circle' id="skipPrevious"></i>
+                <i class='bx bx-rotate-left' id="restart"></i>
+                <i class="bx bxs-play-circle" id="playPause"></i>
+                <i class='bx bx-rotate-right' id="forward"></i>
+                <i class='bx bx-skip-next-circle' id="skipNext"></i>
             </div>
-            <p class="timeend">5:40</p>
+            <p class="timeend" id="totalDuration">0:00</p>
+            <audio id="audioPlayer"></audio>
         </div>
     </div>
 
+    <script src="./script.js"></script>
 </body>
 
 </html>
