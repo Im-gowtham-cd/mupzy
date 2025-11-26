@@ -1,0 +1,30 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: 'Sprit';
+    src: url('./font/Sprit.otf');
+}
+
+@font-face {
+    font-family: 'Eagle';
+    src: url('./font/Eagle.ttf');
+}
+
+@font-face {
+    font-family: 'Rockybilly';
+    src: url('./font/Rockybilly.ttf');
+}
+
+@font-face {
+    font-family: 'Komigo';
+    src: url('./font/Komigo.ttf');
+}
+
+@font-face {
+    font-family: 'Jember';
+    src: url('./font/Jember.ttf');
+}
