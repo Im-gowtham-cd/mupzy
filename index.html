@@ -6,14 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MuPzy</title>
     <link rel="stylesheet" href="./index.css">
-     <link href='https://cdn.boxicons.com/3.0.5/fonts/basic/boxicons.min.css' rel='stylesheet'>
+    <link href='https://cdn.boxicons.com/3.0.5/fonts/basic/boxicons.min.css' rel='stylesheet'>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link href='https://cdn.boxicons.com/3.0.5/fonts/brands/boxicons-brands.min.css' rel='stylesheet'>
 </head>
 
 <body>
     <nav>
-        <span class="nav-title"><p>Mupzy</p></span>
+        <span class="nav-title">
+            <p>Mupzy</p>
+        </span>
 
         <ul class="nav-links">
             <li><a href="#">Home</a></li>
@@ -29,10 +31,10 @@
 
     <div class="content">
         <img src="./Preset/Y3.webp" alt="" class="Y1">
-        <i class='bxr  bx-music-alt' id="animate"></i>
-        <i class='bxr  bx-radio' id="animate"></i>
-        <i class='bxr  bx-music-alt' id="animate"></i>
-        <i class='bxr  bx-radio' id="animate"></i>
+        <i class='bxr bx-music-alt' id="animate"></i>
+        <i class='bxr bx-radio' id="animate"></i>
+        <i class='bxr bx-music-alt' id="animate"></i>
+        <i class='bxr bx-radio' id="animate"></i>
         <h1 class="personaldata">Song</h1>
 
         <ul class="songhead">
@@ -54,12 +56,17 @@
             <p class="timeend" id="totalDuration">0:00</p>
         </div>
 
-        <div id="lyricsSection" class="lyrics-section"></div>
-
         <div id="yt-player" style="width:1px; height:1px; opacity:0;"></div>
+
+    </div>
+    <div class="playlistcontainer">
+        <ul class="scroll">
+            <li><i class='bx  bx-arrow-in-up-circle-half'></i> </li>
+        </ul>
     </div>
 
     <script src="https://www.youtube.com/iframe_api"></script>
     <script src="./script.js"></script>
 </body>
+
 </html>
