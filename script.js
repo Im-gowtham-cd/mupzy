@@ -19,9 +19,9 @@ const songs = [
     videoId: "NED7nev2ywQ"
   },
   {
-    title: "Back To Friends",
-    artist: "Sombr",
-    videoId: "c8zq4kAn_O0" // <-- FIXED: Used a working embed ID
+    title: "Calling After Me",
+    artist: "Wallows",
+    videoId: "xtU6xI8wUTs"
   },
   {
     title: "Arabic Kuthu",
@@ -53,7 +53,7 @@ function onPlayerReady() {
 function onPlayerStateChange(e) {
   console.log("Player state changed:", e.data);
   const icon = playPauseButton.querySelector('i');
-  
+
   if (e.data === YT.PlayerState.ENDED) {
     nextSong();
   } else if (e.data === YT.PlayerState.CUED) {
@@ -142,7 +142,7 @@ function updateLoop() {
     // GetDuration might return 0 if the video hasn't loaded metadata yet, so check it.
     const duration = player.getDuration();
     if (duration > 0) {
-        totalDurationSpan.textContent = formatTime(duration);
+      totalDurationSpan.textContent = formatTime(duration);
     }
   }
 

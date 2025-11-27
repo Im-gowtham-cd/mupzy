@@ -449,7 +449,7 @@ nav {
 
 
 .playlistcontainer{
-    height: 1000px;
+    height: 670px;
     position: sticky;
     top: 0px;
     /* left: 370px; */
@@ -484,5 +484,74 @@ nav {
     border-radius: 100px;
     list-style: none;
     background-color: #ffffff;
-    color: #2cb36fe1;
+    color: #ff6f00e1;
+    /* color: #2cb36fe1; */
+}
+
+.songdata {
+    color: #ff6f00e1;
+    font-size: 172px;
+    font-family: 'Jember';
+    /* border: 1px solid white; */
+    height: 25vh;
+    display: flex;
+    /* padding-left: 40px; */
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.songdata::after {
+    content: '';
+    background-color: #ff6f00e1;
+    height: 5px;
+    width: 735px;
+    position: absolute;
+    bottom: 0;
+}
+
+.playlistcontainer form{
+    height: 60vh;
+    width: 100%;
+    gap: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 1px solid black;
+    position: relative;
+}
+
+.playlistcontainer form p{
+    position: absolute;
+    left: 0;
+    background: #ff6f00e1;
+    color: #ffffff;
+}
+
+.playlistcontainer form input{
+    border: 3px solid #ff6f00e1;
+    /* padding: 30px; */
+    height: 70px;
+    width: 40%;
+    color: #ff6f00e1;
+    outline: none;
+}
+
+.playlistcontainer form p:nth-child(1){
+    top: 80px;
+    left: 27.5%;
+    padding: 10px 20px;
+}
+
+.playlistcontainer form p:nth-child(2){
+    top: 210px;
+    padding: 10px 20px;
+    left: 27.05%;
+}
+
+.playlistcontainer form p:nth-child(3){
+    top: 340px;
+    padding: 10px 20px;
+    left: 28%;
 }

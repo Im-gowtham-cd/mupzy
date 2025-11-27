@@ -18,7 +18,7 @@
         </span>
 
         <ul class="nav-links">
-            <li><a href="#">Home</a></li>
+            <li><a href="#play">Home</a></li>
             <li><a href="#">About</a></li>
             <li><a href="#">Contact</a></li>
         </ul>
@@ -27,6 +27,11 @@
             <a href="#">Login</a>
             <a href="./signup.html">Sign Up</a>
         </ul>
+        <div class="hamburger-menu">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
     </nav>
 
     <div class="content">
@@ -59,10 +64,19 @@
         <div id="yt-player" style="width:1px; height:1px; opacity:0;"></div>
 
     </div>
-    <div class="playlistcontainer">
+    <div class="playlistcontainer" id="play">
         <ul class="scroll">
             <li><i class='bx  bx-arrow-in-up-circle-half'></i> </li>
         </ul>
+        <h1 class="songdata">Song List</h1>
+        <form action="">
+            <p>Song</p>
+            <p>Author</p>
+            <p>URL</p>
+            <input type="text" placeholder="">
+            <input type="text" placeholder="">
+            <input type="text" placeholder="">
+        </form>
     </div>
 
     <script src="https://www.youtube.com/iframe_api"></script>
