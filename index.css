@@ -518,7 +518,7 @@ nav {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     position: relative;
 }
 
@@ -527,15 +527,19 @@ nav {
     left: 0;
     background: #ff6f00e1;
     color: #ffffff;
+    font-weight: 700;
 }
 
-.playlistcontainer form input{
+.playlistcontainer form input[type=text]{
     border: 3px solid #ff6f00e1;
     /* padding: 30px; */
     height: 70px;
     width: 40%;
     color: #ff6f00e1;
+    padding-left: 60px;
     outline: none;
+    font-family: 'Poppins';
+    font-size: 20px;
 }
 
 .playlistcontainer form p:nth-child(1){
@@ -554,4 +558,19 @@ nav {
     top: 340px;
     padding: 10px 20px;
     left: 28%;
+}
+
+form input[type=submit]{
+    border: 3px solid #ff6f00e1;
+    height: 65px;
+    width: 8%;
+    /* padding: 0 20px; */
+    position: absolute;
+    color: #ffffff;
+    background-color: #ff6f00e1;
+    /* padding-left: 60px; */
+    outline: none;
+    font-family: 'Poppins';
+    right: 20%;
+    font-size: 17px;
 }
