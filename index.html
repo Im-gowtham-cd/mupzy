@@ -6,44 +6,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MuPzy</title>
     <link rel="stylesheet" href="./index.css">
-    <link href='https://cdn.boxicons.com/3.0.5/fonts/basic/boxicons.min.css' rel='stylesheet'>
+     <link href='https://cdn.boxicons.com/3.0.5/fonts/basic/boxicons.min.css' rel='stylesheet'>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link href='https://cdn.boxicons.com/3.0.5/fonts/brands/boxicons-brands.min.css' rel='stylesheet'>
 </head>
 
 <body>
     <nav>
-        <span class="nav-title">
-            <p>Mupzy</p>
-        </span>
+        <span class="nav-title"><p>Mupzy</p></span>
 
         <ul class="nav-links">
             <li><a href="#">Home</a></li>
             <li><a href="#">About</a></li>
             <li><a href="#">Contact</a></li>
         </ul>
+
         <ul class="nav-button">
             <a href="#">Login</a>
             <a href="./signup.html">Sign Up</a>
         </ul>
     </nav>
+
     <div class="content">
-        <!-- <img src="./Preset/Y1.webp" alt="" class="Y3"> -->
         <img src="./Preset/Y3.webp" alt="" class="Y1">
-        <!-- <img src="./Preset/Y2.webp" alt="" class="Y2"> -->
         <i class='bxr  bx-music-alt' id="animate"></i>
         <i class='bxr  bx-radio' id="animate"></i>
         <i class='bxr  bx-music-alt' id="animate"></i>
         <i class='bxr  bx-radio' id="animate"></i>
-        <h1 class="personaldata">
-            Song
-        </h1>
+        <h1 class="personaldata">Song</h1>
+
         <ul class="songhead">
             <li id="songTitle">Loading...</li>
             <li id="songArtist">Artist</li>
         </ul>
+
         <div class="musicplayer">
             <p class="timestart" id="currentTime">0:00</p>
+
             <div class="musiccontroler">
                 <i class='bx bx-skip-previous-circle' id="skipPrevious"></i>
                 <i class='bx bx-rotate-left' id="restart"></i>
@@ -51,12 +50,16 @@
                 <i class='bx bx-rotate-right' id="forward"></i>
                 <i class='bx bx-skip-next-circle' id="skipNext"></i>
             </div>
+
             <p class="timeend" id="totalDuration">0:00</p>
-            <audio id="audioPlayer"></audio>
         </div>
+
+        <div id="lyricsSection" class="lyrics-section"></div>
+
+        <div id="yt-player" style="width:1px; height:1px; opacity:0;"></div>
     </div>
 
+    <script src="https://www.youtube.com/iframe_api"></script>
     <script src="./script.js"></script>
 </body>
-
 </html>

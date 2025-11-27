@@ -1,11 +1,423 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MuPzy — YouTube Player</title>
+
+  <!-- Boxicons -->
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="./index.css">
+  <style>
+    /* Minimal styling so the demo is usable. Replace with your index.css if you have one. */
+    :root { font-family: Arial, Helvetica, sans-serif; color: #111; }
+    /* body { margin: 0; padding: 16px; background: #f6f7fb; } */
+    /* nav { display:flex; justify-content:space-between; align-items:center; padding:8px 0; } */
+    .content { max-width:900px; margin:16px auto; background:#fff; padding:18px; border-radius:8px; box-shadow:0 6px 18px rgba(0,0,0,.06); }
+    .songhead { list-style:none; padding:0; margin:0 0 12px 0; display:flex; gap:12px; align-items:center; }
+    .songhead li { font-weight:600; }
+    .musicplayer { display:flex; align-items:center; gap:12px; }
+    .musiccontroler { display:flex; gap:10px; align-items:center; font-size:28px; }
+    .timestart, .timeend { width:56px; text-align:center; font-variant-numeric: tabular-nums; }
+    #lyricsSection { margin-top:18px; max-height:260px; overflow:auto; padding:10px; border-radius:6px; background:#fafafa; border:1px solid #eee; }
+    #lyricsSection p { margin:6px 0; padding:6px 8px; border-radius:4px; cursor:pointer; }
+    #lyricsSection p.active { background:#222; color:#fff; font-weight:700; }
+    #playlist { margin-top:14px; display:flex; flex-direction:column; gap:6px; }
+    .playlist-item { padding:8px 10px; border-radius:6px; background:#fff; border:1px solid #eee; cursor:pointer; display:flex; justify-content:space-between; align-items:center; }
+    .playlist-item.playing { background:#eef2ff; border-color:#c7d2ff; }
+    .meta { font-size:13px; color:#555; }
+    button.icon { background:none; border:none; cursor:pointer; font-size:28px; padding:4px; }
+    .small { font-size:13px; color:#666; }
+  </style>
 </head>
 <body>
-  
+
+  <nav>
+    <div><strong>MuPzy</strong></div>
+    <div class="small">YouTube Player (YouTube API)</div>
+  </nav>
+
+  <div class="content">
+    <div style="display:flex;gap:14px;align-items:center;">
+      <img src="./Preset/Y3.webp" alt="cover" style="width:96px;height:96px;border-radius:8px;object-fit:cover">
+      <div>
+        <ul class="songhead">
+          <li id="songTitle">Loading...</li>
+          <li id="songArtist" class="small">Artist</li>
+        </ul>
+
+        <div class="musicplayer">
+          <div class="timestart" id="currentTime">0:00</div>
+
+          <div class="musiccontroler">
+            <button class="icon" id="skipPrevious" title="Previous"><i class='bx bx-skip-previous-circle'></i></button>
+            <button class="icon" id="restart" title="-5s"><i class='bx bx-rotate-left'></i></button>
+            <button class="icon" id="playPause" title="Play/Pause"><i class='bx bxs-play-circle'></i></button>
+            <button class="icon" id="forward" title="+5s"><i class='bx bx-rotate-right'></i></button>
+            <button class="icon" id="skipNext" title="Next"><i class='bx bx-skip-next-circle'></i></button>
+          </div>
+
+          <div class="timeend" id="totalDuration">0:00</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lyrics -->
+    <div id="lyricsSection" class="lyrics-section" aria-live="polite"></div>
+
+    <!-- Playlist -->
+    <div id="playlist" aria-label="Playlist"></div>
+
+    <!-- Hidden YouTube Player container -->
+    <div id="yt-player" style="width:1px;height:1px;opacity:0;position:fixed;left:-9999px;top:-9999px;"></div>
+  </div>
+
+  <!-- YouTube IFrame API -->
+  <script src="https://www.youtube.com/iframe_api"></script>
+
+  <script>
+    // -------------------- UI references --------------------
+    const playPauseButton = document.getElementById('playPause');
+    const skipPreviousButton = document.getElementById('skipPrevious');
+    const skipNextButton = document.getElementById('skipNext');
+    const restartButton = document.getElementById('restart');
+    const forwardButton = document.getElementById('forward');
+    const currentTimeSpan = document.getElementById('currentTime');
+    const totalDurationSpan = document.getElementById('totalDuration');
+    const songTitleEl = document.getElementById('songTitle');
+    const songArtistEl = document.getElementById('songArtist');
+    const lyricsSection = document.getElementById('lyricsSection');
+    const playlistEl = document.getElementById('playlist');
+
+    // -------------------- Playlist (YouTube-only) --------------------
+    // Add as many songs as you want. If you have LRC-style timestamps include them.
+    const songs = [
+      {
+        title: "I walk this earth all by myself",
+        artist: "EKKSTACY",
+        youtubeId: "U9BwWKXjVaI",
+        cover: "./Preset/Y3.webp",
+        lyrics:
+`[00:00.00]I walk this earth all by myself
+[00:07.00]I'm doing drugs, but they don't help
+[00:13.00]My voice is nothing when I'm screaming out for help
+[00:19.00]I stretch my hand, but my grip just gives out
+[00:24.00]Oh-oh,
+[00:26.00]Oh-oh
+[00:28.00]Oh-oh,
+[00:30.00]Oh-oh`
+      },
+      {
+        title: "Never Gonna Give You Up",
+        artist: "Rick Astley",
+        youtubeId: "dQw4w9WgXcQ",
+        cover: "./Preset/Y1.webp",
+        lyrics:
+`[00:00.00]We're no strangers to love
+[00:04.00]You know the rules and so do I
+[00:08.00]A full commitment's what I'm thinking of
+[00:12.00]You wouldn't get this from any other guy`
+      },
+      {
+        title: "Sample Instrumental",
+        artist: "Instrumental Artist",
+        youtubeId: "3JZ4pnNtyxQ",
+        cover: "./Preset/Y2.webp",
+        lyrics:
+`[00:00.00]Instrumental intro...
+[00:08.00]Melody begins`
+      }
+    ];
+
+    // -------------------- Player state --------------------
+    let player = null;
+    let currentSongIndex = 0;
+    let isPlayerReady = false;
+    let isPlaying = false;
+    let timedLyrics = [];      // parsed timed lyric entries [{time: seconds, text: ""}, ...]
+    let activeLyricIndex = -1;
+
+    // -------------------- YouTube API init --------------------
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player('yt-player', {
+        height: '1',
+        width: '1',
+        videoId: songs[currentSongIndex].youtubeId,
+        playerVars: { 'playsinline': 1, 'controls': 0, 'rel': 0 },
+        events: {
+          'onReady': onPlayerReady,
+          'onStateChange': onPlayerStateChange,
+          'onError': onPlayerError
+        }
+      });
+    }
+
+    function onPlayerReady() {
+      isPlayerReady = true;
+      // Load UI
+      renderPlaylist();
+      loadSong(currentSongIndex, { autoplay: false });
+      updatePlayIcon(false);
+      // Start the time-sync loop
+      requestAnimationFrame(updateLoop);
+    }
+
+    function onPlayerError(e) {
+      console.error("YouTube player error:", e);
+    }
+
+    function onPlayerStateChange(e) {
+      const state = e.data;
+      if (state === YT.PlayerState.PLAYING) {
+        isPlaying = true;
+        updatePlayIcon(true);
+        // try to get duration
+        const d = player.getDuration();
+        if (Number.isFinite(d) && d > 0) {
+          totalDurationSpan.textContent = formatTime(d);
+        }
+      } else if (state === YT.PlayerState.PAUSED) {
+        isPlaying = false;
+        updatePlayIcon(false);
+      } else if (state === YT.PlayerState.ENDED) {
+        isPlaying = false;
+        updatePlayIcon(false);
+        skipNext();
+      }
+    }
+
+    // -------------------- Helpers --------------------
+    function formatTime(sec) {
+      if (!Number.isFinite(sec) || sec < 0) return "0:00";
+      const s = Math.floor(sec);
+      const m = Math.floor(s / 60);
+      const r = s % 60;
+      return m + ":" + (r < 10 ? "0" + r : r);
+    }
+
+    function updatePlayIcon(playing) {
+      const icon = playPauseButton.querySelector('i');
+      if (!icon) return;
+      if (playing) {
+        icon.classList.remove('bxs-play-circle');
+        icon.classList.add('bxs-pause-circle');
+      } else {
+        icon.classList.remove('bxs-pause-circle');
+        icon.classList.add('bxs-play-circle');
+      }
+    }
+
+    // -------------------- Load / Play songs --------------------
+    function loadSong(index, opts = { autoplay: true }) {
+      if (!player || !isPlayerReady) return;
+      currentSongIndex = ((index % songs.length) + songs.length) % songs.length;
+      const song = songs[currentSongIndex];
+
+      // Update metadata UI
+      songTitleEl.textContent = song.title || "Unknown";
+      songArtistEl.textContent = song.artist || "Unknown artist";
+      // Update playlist active class
+      highlightPlaylistItem(currentSongIndex);
+
+      // Parse lyrics (timed if timestamps exist)
+      parseAndRenderLyrics(song.lyrics || "");
+
+      // Load the video. If opts.autoplay is true, start playing.
+      if (opts.autoplay) {
+        player.loadVideoById(song.youtubeId);
+      } else {
+        player.cueVideoById(song.youtubeId);
+      }
+
+      // clear duration until available
+      totalDurationSpan.textContent = "0:00";
+      currentTimeSpan.textContent = "0:00";
+      activeLyricIndex = -1;
+    }
+
+    function skipNext() {
+      loadSong(currentSongIndex + 1, { autoplay: true });
+    }
+    function skipPrevious() {
+      loadSong(currentSongIndex - 1, { autoplay: true });
+    }
+
+    // -------------------- Controls --------------------
+    playPauseButton.addEventListener('click', () => {
+      if (!player || !isPlayerReady) return;
+      const state = player.getPlayerState();
+      if (state === YT.PlayerState.PLAYING) player.pauseVideo();
+      else player.playVideo();
+    });
+
+    restartButton.addEventListener('click', () => {
+      if (!player || !isPlayerReady) return;
+      const t = Math.max(0, player.getCurrentTime() - 5);
+      player.seekTo(t, true);
+    });
+
+    forwardButton.addEventListener('click', () => {
+      if (!player || !isPlayerReady) return;
+      const t = Math.min((player.getCurrentTime() + 5), player.getDuration() || player.getCurrentTime() + 5);
+      player.seekTo(t, true);
+    });
+
+    skipNextButton.addEventListener('click', skipNext);
+    skipPreviousButton.addEventListener('click', skipPrevious);
+
+    // Keyboard support: space = play/pause, left/right = -5/+5
+    window.addEventListener('keydown', (ev) => {
+      if (ev.code === 'Space') { ev.preventDefault(); playPauseButton.click(); }
+      if (ev.code === 'ArrowLeft') { ev.preventDefault(); restartButton.click(); }
+      if (ev.code === 'ArrowRight') { ev.preventDefault(); forwardButton.click(); }
+    });
+
+    // -------------------- Lyrics parsing & rendering --------------------
+    // Parses LRC-style text into timedLyrics array if timestamps exist.
+    function parseAndRenderLyrics(text) {
+      timedLyrics = [];
+      activeLyricIndex = -1;
+      lyricsSection.innerHTML = "";
+
+      if (!text || !text.trim()) {
+        lyricsSection.innerHTML = "<p>No lyrics available</p>";
+        return;
+      }
+
+      // detect timestamps like [mm:ss.xx] or [m:ss]
+      const hasTimestamps = /\[[0-9]{1,2}:[0-9]{2}(?:\.[0-9]{1,2})?\]/.test(text);
+
+      if (hasTimestamps) {
+        timedLyrics = parseLrc(text);
+        renderTimedLyrics(timedLyrics);
+      } else {
+        // render plain lines
+        const lines = text.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+        lyricsSection.innerHTML = "";
+        lines.forEach((ln) => {
+          const p = document.createElement('p');
+          p.textContent = ln;
+          lyricsSection.appendChild(p);
+        });
+      }
+    }
+
+    // parse lrc-style text into entries: [{time, text}]
+    function parseLrc(text) {
+      const out = [];
+      const lines = text.split(/\r?\n/);
+      const timeRegex = /\[([0-9]{1,2}):([0-9]{2})(?:\.([0-9]{1,2}))?\]/g;
+      for (const raw of lines) {
+        let match;
+        timeRegex.lastIndex = 0;
+        const content = raw.replace(timeRegex, '').trim();
+        if (!content) continue;
+        while ((match = timeRegex.exec(raw)) !== null) {
+          const mm = parseInt(match[1], 10) || 0;
+          const ss = parseInt(match[2], 10) || 0;
+          const cent = match[3] ? parseInt(match[3].padEnd(2,'0'), 10) : 0; // treat .3 as .30
+          const timeSec = mm * 60 + ss + cent / 100;
+          out.push({ time: timeSec, text: content });
+        }
+      }
+      out.sort((a,b) => a.time - b.time);
+      return out;
+    }
+
+    function renderTimedLyrics(entries) {
+      lyricsSection.innerHTML = "";
+      entries.forEach((e, i) => {
+        const p = document.createElement('p');
+        p.textContent = e.text;
+        p.dataset.index = i;
+        // click to seek
+        p.addEventListener('click', () => {
+          if (!player || !isPlayerReady) return;
+          player.seekTo(entries[i].time, true);
+        });
+        lyricsSection.appendChild(p);
+      });
+    }
+
+    function setActiveLyric(idx) {
+      const children = Array.from(lyricsSection.children);
+      children.forEach((el, i) => {
+        el.classList.toggle('active', i === idx);
+      });
+      activeLyricIndex = idx;
+      // scroll to center active
+      const activeEl = children[idx];
+      if (activeEl) {
+        const top = activeEl.offsetTop - (lyricsSection.clientHeight / 2) + (activeEl.clientHeight / 2);
+        lyricsSection.scrollTo({ top, behavior: 'smooth' });
+      }
+    }
+
+    // -------------------- Playlist rendering --------------------
+    function renderPlaylist() {
+      playlistEl.innerHTML = '';
+      songs.forEach((s, i) => {
+        const div = document.createElement('div');
+        div.className = 'playlist-item';
+        div.dataset.index = i;
+        div.innerHTML = `
+          <div>
+            <div style="font-weight:600">${s.title}</div>
+            <div class="meta">${s.artist}</div>
+          </div>
+          <div style="font-size:12px;color:#666">▶</div>
+        `;
+        div.addEventListener('click', () => loadSong(i, { autoplay: true }));
+        playlistEl.appendChild(div);
+      });
+      highlightPlaylistItem(currentSongIndex);
+    }
+
+    function highlightPlaylistItem(index) {
+      Array.from(playlistEl.children).forEach((el, i) => {
+        el.classList.toggle('playing', i === index);
+      });
+    }
+
+    // -------------------- Update loop (time + lyrics sync) --------------------
+    function updateLoop() {
+      if (player && isPlayerReady) {
+        try {
+          const state = player.getPlayerState();
+          if (state === YT.PlayerState.PLAYING || state === YT.PlayerState.PAUSED) {
+            const t = player.getCurrentTime();
+            currentTimeSpan.textContent = formatTime(t);
+            // update duration if available
+            const d = player.getDuration();
+            if (Number.isFinite(d) && d > 0) {
+              totalDurationSpan.textContent = formatTime(d);
+            }
+            // sync timed lyrics
+            if (timedLyrics && timedLyrics.length > 0) {
+              // find index where t >= entry.time and < next.time
+              let idx = timedLyrics.findIndex((entry, i) => {
+                const nextTime = timedLyrics[i+1]?.time ?? Infinity;
+                return t >= entry.time && t < nextTime;
+              });
+              if (idx === -1 && t >= (timedLyrics[timedLyrics.length - 1]?.time ?? -1)) {
+                idx = timedLyrics.length - 1;
+              }
+              if (idx !== -1 && idx !== activeLyricIndex) {
+                setActiveLyric(idx);
+              }
+            }
+          }
+        } catch (err) {
+          // occasional cross-origin or API timing issues; ignore
+          // console.debug('updateLoop error', err);
+        }
+      }
+      requestAnimationFrame(updateLoop);
+    }
+
+    // -------------------- Initialize UI & load first song --------------------
+    // We wait for onYouTubeIframeAPIReady -> onPlayerReady to call loadSong.
+
+  </script>
 </body>
 </html>
