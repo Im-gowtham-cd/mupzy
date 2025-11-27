@@ -574,3 +574,8 @@ form input[type=submit]{
     right: 20%;
     font-size: 17px;
 }
+
+::selection{
+    background-color: #ff6f00e1;
+    color: #ffffff;
+}
