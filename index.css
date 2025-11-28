@@ -29,12 +29,12 @@
     src: url('./font/Jember.ttf');
 }
 
-@font-face{
+@font-face {
     font-family: 'Biz';
     src: url('./font/Bizantheum.otf');
 }
 
-@font-face{
+@font-face {
     font-family: 'Luck';
     src: url('./font/LuckiestGuy.ttf');
 }
@@ -55,6 +55,7 @@ nav {
     position: fixed;
     background: blur(1px);
     top: 0;
+    overflow: hidden;
     /* justify-content: space-between; */
 }
 
@@ -147,7 +148,7 @@ nav {
     padding: 10px 15px;
     color: white;
     background-color: #ff6f00e1;
-    /* border: 1px solid #ff6f00e1; */  
+    /* border: 1px solid #ff6f00e1; */
 }
 
 /* .nav-title:hover ~ .nav-links{
@@ -265,7 +266,7 @@ nav {
 }
 
 
-.lyrics-section p{
+.lyrics-section p {
     color: #ffffff;
     margin-top: 10px;
     font-family: 'Luck';
@@ -274,13 +275,13 @@ nav {
     transition: opacity 0.35s ease, transform 0.35s ease;
 }
 
-.lyrics-section p.active{
+.lyrics-section p.active {
     opacity: 1;
     transform: scale(1.02);
 }
 
 .lyrics-section p.prev,
-.lyrics-section p.next{
+.lyrics-section p.next {
     opacity: 0.6;
 }
 
@@ -334,7 +335,7 @@ nav {
     will-change: transform;
 }
 
-#animate:nth-child(2)    {
+#animate:nth-child(2) {
     animation: flow2 16s ease-in-out infinite alternate;
     position: absolute;
     left: 100px;
@@ -344,7 +345,7 @@ nav {
     will-change: transform;
 }
 
-#animate:nth-child(3)    {
+#animate:nth-child(3) {
     animation: flow3 16s ease-in-out infinite alternate;
     position: absolute;
     /* right: 100px; */
@@ -354,7 +355,7 @@ nav {
     will-change: transform;
 }
 
-#animate:nth-child(4)    {
+#animate:nth-child(4) {
     animation: flow4 16s ease-in-out infinite alternate;
     position: absolute;
     /* right: 50px; */
@@ -365,37 +366,99 @@ nav {
 }
 
 @keyframes flow1 {
-    0% { transform: translate(0, 0); }
-    20% { transform: translate(-50px, 0); }
-    40% { transform: translate(-80px, -40px); }
-    60% { transform: translate(-40px, -80px); }
-    80% { transform: translate(20px, -40px); }
-    100% { transform: translate(0, 0); }
+    0% {
+        transform: translate(0, 0);
+    }
+
+    20% {
+        transform: translate(-50px, 0);
+    }
+
+    40% {
+        transform: translate(-80px, -40px);
+    }
+
+    60% {
+        transform: translate(-40px, -80px);
+    }
+
+    80% {
+        transform: translate(20px, -40px);
+    }
+
+    100% {
+        transform: translate(0, 0);
+    }
 }
 
 @keyframes flow2 {
-    0% { transform: translate(0, 50px); }
-    25% { transform: translate(60px, 60px); }
-    50% { transform: translate(60px, 120px); }
-    75% { transform: translate(20px, 170px); }
-    100% { transform: translate(0, 50px); }
+    0% {
+        transform: translate(0, 50px);
+    }
+
+    25% {
+        transform: translate(60px, 60px);
+    }
+
+    50% {
+        transform: translate(60px, 120px);
+    }
+
+    75% {
+        transform: translate(20px, 170px);
+    }
+
+    100% {
+        transform: translate(0, 50px);
+    }
 }
 
 @keyframes flow3 {
-    0% { transform: translate(1000px, 100px); }
-    25% { transform: translate(1060px, 150px); }
-    50% { transform: translate(1200px,100px); }
-    75% { transform: translate(1060px, 130px); }
-    100% { transform: translate(1000px, 100px); }
+    0% {
+        transform: translate(1000px, 100px);
+    }
+
+    25% {
+        transform: translate(1060px, 150px);
+    }
+
+    50% {
+        transform: translate(1200px, 100px);
+    }
+
+    75% {
+        transform: translate(1060px, 130px);
+    }
+
+    100% {
+        transform: translate(1000px, 100px);
+    }
 }
 
 @keyframes flow4 {
-    0% { transform: translate(1100px, 0px); }
-    20% { transform: translate(1040px, 60px); }
-    40% { transform: translate(1100px, 120px); }
-    60% { transform: translate(1040px, 60px); }
-    80% { transform: translate(1020px, 10px); }
-    100% { transform: translate(1100px, 0px); }
+    0% {
+        transform: translate(1100px, 0px);
+    }
+
+    20% {
+        transform: translate(1040px, 60px);
+    }
+
+    40% {
+        transform: translate(1100px, 120px);
+    }
+
+    60% {
+        transform: translate(1040px, 60px);
+    }
+
+    80% {
+        transform: translate(1020px, 10px);
+    }
+
+    100% {
+        transform: translate(1100px, 0px);
+    }
 }
 
 
@@ -414,8 +477,8 @@ nav {
     left: 370px;
     z-index: 1;
 }
-
-.Y1{
+*/
+/* .Y1{
     height: 200px;
     position: absolute;
     bottom: 40px;
@@ -423,22 +486,24 @@ nav {
     z-index: 1;
 } */
 
-/* .Y3{
-    height: 500px;
+.Y3 {
+    height: 350px;
     position: absolute;
-    top: 200px;
-    right: -50px;
+    bottom: 50px;
+    right: 50px;
     z-index: 1;
 }
 
-.Y2{
-    height: 500px;
-    position: absolute;
-    top: 10px;
-    z-index: 1;
-} */
 
-.Y1{
+.Y2 {
+    height: 400px;
+    position: absolute;
+    top: 50px;
+    z-index: 1;
+
+}
+
+.Y1 {
     height: 300px;
     position: absolute;
     bottom: 69px;
@@ -446,9 +511,7 @@ nav {
     z-index: 10;
 }
 
-
-
-.playlistcontainer{
+.playlistcontainer {
     height: 670px;
     position: sticky;
     top: 0px;
@@ -459,7 +522,7 @@ nav {
     width: 100%;
 }
 
-.scroll{
+.scroll {
     position: absolute;
     top: -40px;
     left: 10px;
@@ -473,7 +536,7 @@ nav {
     gap: 10px;
 }
 
-.scroll li{
+.scroll li {
     /* padding: 10px; */
     /* width: 5%; */
     display: flex;
@@ -510,7 +573,7 @@ nav {
     bottom: 0;
 }
 
-.playlistcontainer form{
+.playlistcontainer form {
     height: 60vh;
     width: 100%;
     gap: 60px;
@@ -522,7 +585,7 @@ nav {
     position: relative;
 }
 
-.playlistcontainer form p{
+.playlistcontainer form p {
     position: absolute;
     left: 0;
     background: #ff6f00e1;
@@ -530,7 +593,7 @@ nav {
     font-weight: 700;
 }
 
-.playlistcontainer form input[type=text]{
+.playlistcontainer form input[type=text] {
     border: 3px solid #ff6f00e1;
     /* padding: 30px; */
     height: 70px;
@@ -542,40 +605,155 @@ nav {
     font-size: 20px;
 }
 
-.playlistcontainer form p:nth-child(1){
+.playlistcontainer form p:nth-child(1) {
     top: 80px;
     left: 27.5%;
     padding: 10px 20px;
 }
 
-.playlistcontainer form p:nth-child(2){
+.playlistcontainer form p:nth-child(2) {
     top: 210px;
     padding: 10px 20px;
     left: 27.05%;
 }
 
-.playlistcontainer form p:nth-child(3){
+.playlistcontainer form p:nth-child(3) {
     top: 340px;
     padding: 10px 20px;
     left: 28%;
 }
 
-form input[type=submit]{
+form input[type=submit] {
     border: 3px solid #ff6f00e1;
-    height: 65px;
-    width: 8%;
+    height: 50px;
+    width: 40%;
     /* padding: 0 20px; */
     position: absolute;
+    transition: 0.3s;
     color: #ffffff;
     background-color: #ff6f00e1;
     /* padding-left: 60px; */
     outline: none;
     font-family: 'Poppins';
-    right: 20%;
+    right: 30%;
+    bottom: 10px;
     font-size: 17px;
 }
 
-::selection{
+form input[type=submit]:hover {
+    background-color: #ffffff;
+    color: #ff6f00e1;
+    transition: 0.3s;
+}
+
+::selection {
     background-color: #ff6f00e1;
     color: #ffffff;
+}
+
+@media screen and (min-width: 300px) {
+    .personaldata {
+        font-size: 100px;
+    }
+
+    .personaldata::after {
+        width: 300px;
+        bottom: 20px;
+    }
+
+    .songhead {
+        height: 15vh;
+    }
+
+    .songhead li:first-child {
+        font-size: 40px;
+        width: 300px;
+        padding: 7px 0;
+    }
+
+    .songhead li:last-child {
+        font-size: 25px;
+    }
+
+    .musicplayer {
+        width: 300px;
+        left: 8%;
+        gap: 10px;
+    }
+
+    .musiccontroller {
+        width: 100px;
+    }
+
+    .timestart {
+        width: 90px;
+    }
+
+    .timeend {
+        width: 90px;
+    }
+
+    .Y1 {
+        height: 250px;
+        right: 17%;
+    }
+
+    #animate {
+        display: none;
+    }
+
+    .songdata {
+        font-size: 85px;
+    }
+
+    .songdata::after {
+        width: 325px;
+    }
+
+    .playlistcontainer {
+        height: 592px;
+    }
+
+    .playlistcontainer form {
+        height: 50vh;
+        gap: 20px;
+    }
+
+    .playlistcontainer form input[type=text] {
+        width: 90%;
+    }
+
+    .playlistcontainer form:nth-child(2) {
+        width: 90%;
+        padding-left: 0px;
+    }
+
+    form input[type=submit] {
+        width: 90%;
+        right: 5%;
+        bottom: -20px;
+    }
+
+    .playlistcontainer img {
+        display: none;
+    }
+
+    .playlistcontainer form p:nth-child(1) {
+        top: 40px;
+        left: 5%;
+        padding: 5px 19px;
+    }
+
+    .playlistcontainer form p:nth-child(2) {
+        top: 130px;
+        padding: 5px 15px;
+        right: 5%;
+    }
+
+    .playlistcontainer form p:nth-child(3) {
+        top: 220px;
+        padding: 5px 25px;
+        left: 5%;
+    }
+
 }
