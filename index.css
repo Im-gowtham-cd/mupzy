@@ -651,7 +651,7 @@ form input[type=submit]:hover {
     color: #ffffff;
 }
 
-@media screen and (min-width: 300px) {
+@media screen and (max-width: 400px) {
     .personaldata {
         font-size: 100px;
     }
