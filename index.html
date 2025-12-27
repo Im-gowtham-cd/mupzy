@@ -94,6 +94,9 @@
     </form>
   </div>
 
+
+  /*
+
   <!-- YouTube IFrame API -->
   <script src="https://www.youtube.com/iframe_api"></script>
 
@@ -151,9 +154,6 @@
       }
     ];
 
-    /***********************
-     * Detection helpers
-     ***********************/
     function isYouTube(url) {
       return url && (url.includes("youtu.be") || url.includes("youtube.com") || url.match(/^[A-Za-z0-9_-]{11}$/));
     }
@@ -164,10 +164,8 @@
 
     function extractVideoId(url) {
       if (!url) return null;
-      // If the user passed only the id
       if (/^[A-Za-z0-9_-]{11}$/.test(url)) return url;
 
-      // Try to parse common youtube formats
       try {
         // youtu.be/ID
         const short = url.match(/youtu\.be\/([A-Za-z0-9_-]{11})/);
@@ -466,6 +464,8 @@
   </script>
 </body>
 </html>
+
+*/
 
 
 //Hello
