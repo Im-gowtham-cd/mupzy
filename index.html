@@ -1,89 +1,471 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MuPzy</title>
-    <link rel="stylesheet" href="./index.css">
-    <link href='https://cdn.boxicons.com/3.0.5/fonts/basic/boxicons.min.css' rel='stylesheet'>
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link href='https://cdn.boxicons.com/3.0.5/fonts/brands/boxicons-brands.min.css' rel='stylesheet'>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MuPzy</title>
+
+  <!-- Your CSS -->
+  <link rel="stylesheet" href="./index.css">
+
+  <!-- Boxicons (used in your UI) -->
+  <link href='https://cdn.boxicons.com/3.0.5/fonts/basic/boxicons.min.css' rel='stylesheet'>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link href='https://cdn.boxicons.com/3.0.5/fonts/brands/boxicons-brands.min.css' rel='stylesheet'>
+
 </head>
-
 <body>
-    <nav>
-        <span class="nav-title">
-            <p>Mupzy</p>
-        </span>
+  <nav>
+    <span class="nav-title">
+      <p>Mupzy</p>
+    </span>
 
-        <ul class="nav-links">
-            <li><a href="#play">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Contact</a></li>
-        </ul>
+    <ul class="nav-links">
+      <li><a href="#play">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
 
-        <ul class="nav-button">
-            <a href="#">Login</a>
-            <a href="./signup.html">Sign Up</a>
-        </ul>
-        <div class="hamburger-menu">
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-        </div>
-    </nav>
+    <ul class="nav-button">
+      <a href="#">Login</a>
+      <a href="./signup.html">Sign Up</a>
+    </ul>
 
-    <div class="content">
-        <img src="./Preset/Y3.webp" alt="" class="Y1">
-        <i class='bxr bx-music-alt' id="animate"></i>
-        <i class='bxr bx-radio' id="animate"></i>
-        <i class='bxr bx-music-alt' id="animate"></i>
-        <i class='bxr bx-radio' id="animate"></i>
-        <h1 class="personaldata">Song</h1>
-
-        <ul class="songhead">
-            <li id="songTitle">Loading...</li>
-            <li id="songArtist">Artist</li>
-        </ul>
-
-        <div class="musicplayer">
-            <p class="timestart" id="currentTime">0:00</p>
-
-            <div class="musiccontroler">
-                <i class='bx bx-skip-previous-circle' id="skipPrevious"></i>
-                <i class='bx bx-rotate-left' id="restart"></i>
-                <i class="bx bxs-play-circle" id="playPause"></i>
-                <i class='bx bx-rotate-right' id="forward"></i>
-                <i class='bx bx-skip-next-circle' id="skipNext"></i>
-            </div>
-
-            <p class="timeend" id="totalDuration">0:00</p>
-        </div>
-
-        <div id="yt-player" style="width:1px; height:1px; opacity:0;"></div>
-
+    <div class="hamburger-menu">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
     </div>
-    <div class="playlistcontainer" id="play">
-        <img src="./Preset/Y2.webp" alt="" class="Y2">
-        <img src="./Preset/Y1.webp" alt="" class="Y3">
-        <ul class="scroll">
-            <li><i class='bx  bx-arrow-in-up-circle-half'></i> </li>
-        </ul>
-        <h1 class="songdata">Song List</h1>
-        <form action="">
-            <p>Song</p>
-            <p>Author</p>
-            <p>URL</p>
-            <input type="text" placeholder="">
-            <input type="text" placeholder="">
-            <input type="text" placeholder="">
-            <input type="submit" value="Add Song">
-        </form>
+  </nav>
+
+  <div class="content">
+    <!-- Decorative images (your preset folder) -->
+    <img src="./Preset/Y3.webp" alt="" class="Y1">
+    <i class='bxr bx-music-alt' id="animate"></i>
+    <i class='bxr bx-radio' id="animate"></i>
+    <i class='bxr bx-music-alt' id="animate"></i>
+    <i class='bxr bx-radio' id="animate"></i>
+
+    <h1 class="personaldata">Song</h1>
+
+    <ul class="songhead">
+      <li id="songTitle">Loading...</li>
+      <li id="songArtist">Artist</li>
+    </ul>
+
+    <div class="musicplayer">
+      <p class="timestart" id="currentTime">0:00</p>
+
+      <div class="musiccontroler" role="group" aria-label="Music controls">
+        <i class='bx bx-skip-previous-circle' id="skipPrevious" title="Previous"></i>
+        <i class='bx bx-rotate-left' id="restart" title="Rewind 5s"></i>
+        <i class="bx bxs-play-circle" id="playPause" title="Play / Pause"></i>
+        <i class='bx bx-rotate-right' id="forward" title="Forward 5s"></i>
+        <i class='bx bx-skip-next-circle' id="skipNext" title="Next"></i>
+      </div>
+
+      <p class="timeend" id="totalDuration">0:00</p>
     </div>
 
-    <script src="https://www.youtube.com/iframe_api"></script>
-    <script src="./script.js"></script>
+    <!-- Hidden YouTube iframe (kept for youtube playback) and audio element -->
+    <div id="yt-player" style="width:1px; height:1px; opacity:0;"></div>
+    <audio id="audioPlayer"></audio>
+  </div>
+
+  <div class="playlistcontainer" id="play">
+    <img src="./Preset/Y2.webp" alt="" class="Y2">
+    <img src="./Preset/Y1.webp" alt="" class="Y3">
+
+    <ul class="scroll">
+      <li><i class='bx bx-arrow-in-up-circle-half'></i></li>
+    </ul>
+
+    <h1 class="songdata">Song List</h1>
+
+    <form id="addSongForm" action="javascript:void(0);">
+      <p>Song</p>
+      <p>Author</p>
+      <p>URL</p>
+
+      <input id="newTitle" type="text" placeholder="Song title">
+      <input id="newArtist" type="text" placeholder="Artist name">
+      <input id="newUrl" type="text" placeholder="YouTube / Drive / direct audio URL">
+      <input id="addSongBtn" type="submit" value="Add Song">
+    </form>
+  </div>
+
+  <!-- YouTube IFrame API -->
+  <script src="https://www.youtube.com/iframe_api"></script>
+
+  <!-- Hybrid player script (YouTube + Drive fallback) -->
+  <script>
+    /***********************
+     * UI elements
+     ***********************/
+    const playPauseButton = document.getElementById("playPause");
+    const skipPreviousButton = document.getElementById("skipPrevious");
+    const skipNextButton = document.getElementById("skipNext");
+    const restartButton = document.getElementById("restart");
+    const forwardButton = document.getElementById("forward");
+    const currentTimeSpan = document.getElementById("currentTime");
+    const totalDurationSpan = document.getElementById("totalDuration");
+    const songTitleEl = document.getElementById("songTitle");
+    const songArtistEl = document.getElementById("songArtist");
+    const audio = document.getElementById("audioPlayer");
+
+    audio.preload = "metadata";
+
+    /***********************
+     * Player state
+     ***********************/
+    let player; // YouTube player
+    let isPlayerReady = false;
+    let activeSource = "yt"; // "yt" or "drive"
+    let currentSongIndex = 0;
+
+    /***********************
+     * Playlist (edit these URLs)
+     *
+     * Rules:
+     *  - YouTube: use any youtube url (youtu.be/ID or watch?v=ID)
+     *  - Drive: use either preview link or uc?export=download link - detection covers drive links.
+     *  - fallback: an optional drive/direct url to use if youtube fails.
+     ***********************/
+    const songs = [
+      {
+        title: "Do It",
+        artist: "Stray Kids",
+        url: "https://youtu.be/NED7nev2ywQ", // YouTube
+        fallback: "https://drive.google.com/uc?export=download&id=DRIVE_FILE_ID_1"
+      },
+      {
+        title: "I walk this earth all by myself",
+        artist: "Ekkstacy",
+        url: "https://drive.google.com/file/d/1xBq7Vw5VKshMsKwnkFjpQlcDosM9J2c9/view?usp=sharing" // Drive
+      },
+      {
+        title: "Arabic Kuthu",
+        artist: "Anirudh",
+        url: "https://youtu.be/KUN5Uf9mObQ",
+        fallback: "https://drive.google.com/uc?export=download&id=DRIVE_FILE_ID_3"
+      }
+    ];
+
+    /***********************
+     * Detection helpers
+     ***********************/
+    function isYouTube(url) {
+      return url && (url.includes("youtu.be") || url.includes("youtube.com") || url.match(/^[A-Za-z0-9_-]{11}$/));
+    }
+
+    function isDrive(url) {
+      return url && (url.includes("drive.google.com") || url.includes("uc?export=download"));
+    }
+
+    function extractVideoId(url) {
+      if (!url) return null;
+      // If the user passed only the id
+      if (/^[A-Za-z0-9_-]{11}$/.test(url)) return url;
+
+      // Try to parse common youtube formats
+      try {
+        // youtu.be/ID
+        const short = url.match(/youtu\.be\/([A-Za-z0-9_-]{11})/);
+        if (short) return short[1];
+
+        // v=ID or /watch?v=ID
+        const vMatch = url.match(/[?&]v=([A-Za-z0-9_-]{11})/);
+        if (vMatch) return vMatch[1];
+
+        // /embed/ID
+        const embed = url.match(/youtube\.com\/embed\/([A-Za-z0-9_-]{11})/);
+        if (embed) return embed[1];
+
+        // fallback: last path segment if 11 chars
+        const parts = url.split("/");
+        const last = parts.pop() || parts.pop(); // handle trailing slash
+        if (last && /^[A-Za-z0-9_-]{11}$/.test(last)) return last;
+      } catch (e) {
+        // noop
+      }
+      return null;
+    }
+
+    /***********************
+     * Loading songs
+     ***********************/
+    function loadSong(index) {
+      currentSongIndex = ((index % songs.length) + songs.length) % songs.length;
+      const s = songs[currentSongIndex];
+
+      songTitleEl.textContent = s.title || "Unknown";
+      songArtistEl.textContent = s.artist || "";
+
+      // Detect source and load accordingly
+      if (isYouTube(s.url)) {
+        loadYouTubeSong(s);
+      } else if (isDrive(s.url)) {
+        loadDriveSong(s.url);
+      } else {
+        // treat as direct audio URL
+        loadDriveSong(s.url);
+      }
+    }
+
+    /***********************
+     * YouTube loader and handlers
+     ***********************/
+    function loadYouTubeSong(song) {
+      activeSource = "yt";
+      const videoId = extractVideoId(song.url);
+      if (!videoId) {
+        // no video id -> fallback
+        console.warn("Couldn't extract YouTube ID, using fallback");
+        if (song.fallback) loadDriveSong(song.fallback);
+        return;
+      }
+
+      if (!player || !isPlayerReady) {
+        // if player not ready yet, set videoId via cue and play when ready
+        // when player ready, onYouTubeIframeAPIReady calls loadSong(0) which will use loadYouTubeSong again
+        // safe approach: load when ready
+        try {
+          player.loadVideoById(videoId);
+        } catch (e) {
+          console.warn("YT load failed, fallback to drive", e);
+          if (song.fallback) loadDriveSong(song.fallback);
+        }
+      } else {
+        try {
+          player.loadVideoById(videoId);
+        } catch (err) {
+          console.warn("YT loadVideoById error:", err);
+          if (song.fallback) loadDriveSong(song.fallback);
+        }
+      }
+    }
+
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player("yt-player", {
+        videoId: "",
+        height: "1",
+        width: "1",
+        playerVars: { playsinline: 1, controls: 0, rel: 0 },
+        events: {
+          onReady: function () {
+            isPlayerReady = true;
+            // load the first song
+            loadSong(0);
+          },
+          onStateChange: onPlayerStateChange,
+          onError: function (err) {
+            console.error("YouTube player error:", err);
+            // fallback if available
+            const fallback = songs[currentSongIndex] && songs[currentSongIndex].fallback;
+            if (fallback) loadDriveSong(fallback);
+          }
+        }
+      });
+    }
+
+    function onPlayerStateChange(e) {
+      if (activeSource !== "yt") return;
+
+      // Update play/pause icon
+      if (e.data === YT.PlayerState.PLAYING) {
+        playPauseButton.classList.remove("bxs-play-circle");
+        playPauseButton.classList.add("bxs-pause-circle");
+      } else if (e.data === YT.PlayerState.PAUSED) {
+        playPauseButton.classList.remove("bxs-pause-circle");
+        playPauseButton.classList.add("bxs-play-circle");
+      } else if (e.data === YT.PlayerState.ENDED) {
+        nextSong();
+      }
+    }
+
+    /***********************
+     * Drive / direct audio loader
+     ***********************/
+    function loadDriveSong(url) {
+      activeSource = "drive";
+      // If the url is a google drive "view" link, convert to download stream (best-effort)
+      const normalized = normalizeDriveUrl(url);
+
+      audio.src = normalized;
+      audio.load();
+      audio.play().catch(err => {
+        console.warn("Audio play prevented (autoplay policy); user interaction needed:", err);
+      });
+
+      // Update icon
+      playPauseButton.classList.remove("bxs-play-circle");
+      playPauseButton.classList.add("bxs-pause-circle");
+    }
+
+    function normalizeDriveUrl(url) {
+      if (!url) return url;
+      // If it's the standard "file/d/ID/view" format, convert to uc?export=download
+      try {
+        const m = url.match(/\/d\/([A-Za-z0-9_-]{10,})/);
+        if (m && m[1]) {
+          return "https://drive.google.com/uc?export=download&id=" + m[1];
+        }
+        // If url already contains uc?export=download or direct link, return as-is
+        if (url.includes("uc?export=download") || url.includes("googleusercontent.com")) return url;
+
+        // If it's a sharing link with id= param
+        const idParam = url.match(/[?&]id=([A-Za-z0-9_-]+)/);
+        if (idParam && idParam[1]) {
+          return "https://drive.google.com/uc?export=download&id=" + idParam[1];
+        }
+      } catch (e) {
+        // noop
+      }
+      return url;
+    }
+
+    /***********************
+     * Controls
+     ***********************/
+    playPauseButton.addEventListener("click", () => {
+      if (activeSource === "yt") {
+        const state = player && player.getPlayerState ? player.getPlayerState() : -1;
+        if (state === YT.PlayerState.PLAYING) {
+          player.pauseVideo();
+        } else {
+          try { player.playVideo(); } catch (e) { console.warn(e); }
+        }
+      } else {
+        if (audio.paused) {
+          audio.play();
+          playPauseButton.classList.remove("bxs-play-circle");
+          playPauseButton.classList.add("bxs-pause-circle");
+        } else {
+          audio.pause();
+          playPauseButton.classList.remove("bxs-pause-circle");
+          playPauseButton.classList.add("bxs-play-circle");
+        }
+      }
+    });
+
+    skipNextButton.addEventListener("click", () => nextSong());
+    skipPreviousButton.addEventListener("click", () => prevSong());
+
+    restartButton.addEventListener("click", () => {
+      if (activeSource === "yt") {
+        try { player.seekTo(Math.max(0, player.getCurrentTime() - 5), true); } catch (e) { console.warn(e); }
+      } else {
+        audio.currentTime = Math.max(0, audio.currentTime - 5);
+      }
+    });
+
+    forwardButton.addEventListener("click", () => {
+      if (activeSource === "yt") {
+        try { player.seekTo(player.getCurrentTime() + 5, true); } catch (e) { console.warn(e); }
+      } else {
+        audio.currentTime = audio.currentTime + 5;
+      }
+    });
+
+    window.addEventListener("keydown", (ev) => {
+      if (ev.code === "Space") { ev.preventDefault(); playPauseButton.click(); }
+      if (ev.code === "ArrowRight") forwardButton.click();
+      if (ev.code === "ArrowLeft") restartButton.click();
+      if (ev.code === "ArrowUp") skipNextButton.click();
+      if (ev.code === "ArrowDown") skipPreviousButton.click();
+    });
+
+    // Audio events: sync UI state
+    audio.addEventListener("play", () => {
+      playPauseButton.classList.remove("bxs-play-circle");
+      playPauseButton.classList.add("bxs-pause-circle");
+      activeSource = "drive";
+    });
+
+    audio.addEventListener("pause", () => {
+      playPauseButton.classList.remove("bxs-pause-circle");
+      playPauseButton.classList.add("bxs-play-circle");
+    });
+
+    audio.addEventListener("ended", () => {
+      nextSong();
+    });
+
+    // Update time display frequently
+    setInterval(() => {
+      if (activeSource === "yt") {
+        if (!player || !player.getPlayerState) return;
+        try {
+          const st = player.getCurrentTime();
+          const dur = player.getDuration();
+          currentTimeSpan.textContent = formatTime(st || 0);
+          totalDurationSpan.textContent = isFinite(dur) && dur > 0 ? formatTime(dur) : "0:00";
+        } catch (e) { /* ignore while loading */ }
+      } else {
+        currentTimeSpan.textContent = formatTime(audio.currentTime || 0);
+        totalDurationSpan.textContent = formatTime(audio.duration || 0);
+      }
+    }, 250);
+
+    function formatTime(t) {
+      t = Number(t) || 0;
+      t = Math.floor(t);
+      const mm = Math.floor(t / 60);
+      const ss = String(t % 60).padStart(2, "0");
+      return mm + ":" + ss;
+    }
+
+    /***********************
+     * Song switching
+     ***********************/
+    function nextSong() {
+      loadSong(currentSongIndex + 1);
+    }
+
+    function prevSong() {
+      loadSong(currentSongIndex - 1);
+    }
+
+    /***********************
+     * Add-song UI (simple client-side)
+     ***********************/
+    const addSongForm = document.getElementById("addSongForm");
+    const newTitle = document.getElementById("newTitle");
+    const newArtist = document.getElementById("newArtist");
+    const newUrl = document.getElementById("newUrl");
+
+    addSongForm.addEventListener("submit", () => {
+      const t = newTitle.value.trim();
+      const a = newArtist.value.trim();
+      const u = newUrl.value.trim();
+      if (!t || !u) {
+        alert("Please provide at least a title and URL.");
+        return;
+      }
+      songs.push({ title: t, artist: a, url: u });
+      newTitle.value = "";
+      newArtist.value = "";
+      newUrl.value = "";
+      alert("Song added to playlist (client-side only).");
+    });
+
+    // If the YouTube API hasn't loaded (very rare), fallback to loading first song as drive/direct
+    setTimeout(() => {
+      if (!window.YT || !YT.Player) {
+        console.warn("YouTube API not available — loading first song via direct/audio if possible.");
+        const s = songs[0];
+        if (s) {
+          if (isYouTube(s.url) && s.fallback) {
+            loadDriveSong(s.fallback);
+          } else {
+            loadDriveSong(s.url);
+          }
+        }
+      }
+    }, 2000);
+  </script>
 </body>
-
 </html>
+
+
+//Hello
